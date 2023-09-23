@@ -10,8 +10,7 @@ ENV LANG C.UTF-8
 # build with `docker build --build-arg recorder_version=x.y.z '
 ARG recorder_version=0.8.3
 
-COPY makeconf.sh entrypoint.sh recorder.tar.gz /
-COPY config.mk /config.mk
+COPY makeconf.sh entrypoint.sh recorder.tar.gz config.mk /
 COPY recorder.conf /etc/default/recorder.conf
 COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
