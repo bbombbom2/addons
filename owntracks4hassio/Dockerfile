@@ -31,10 +31,10 @@ libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
 && make \
 && make install \
 && cd / \
-&& chmod 755 /entrypoint.sh \
-&& rm -rf /usr/local/source \
-&& chmod 755 /usr/local/sbin/recorder-health.sh \
-&& apk del .build-deps
+RUN chmod 755 /entrypoint.sh \
+RUN rm -rf /usr/local/source \
+RUN chmod 755 /usr/local/sbin/recorder-health.sh \
+RUN  apk del .build-deps
 RUN apk add --no-cache \
 curl jq
 
