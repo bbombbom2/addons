@@ -29,7 +29,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && tar xzf recorder.tar.gz \
     && cd recorder-$VERSION \
     && mv /config.mk ./
-    && ./config.mk
+    && ./config.mk \
     && make \
     && make install \
     && chmod 755 /entrypoint.sh \
