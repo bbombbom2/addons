@@ -27,8 +27,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && tar xzf recorder.tar.gz \
     && cd recorder-$VERSION \
     && mv /config.mk ./ \
-    && sudo pip make \
-    && sudo pip make install \
+    && make \
+    && make install \
     && cd / \
     && chmod 755 /entrypoint.sh \
     && rm -rf /usr/local/source \
