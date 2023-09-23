@@ -28,7 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && cd recorder-$VERSION \
     && mv /config.mk ./ \
 RUN make && make check && make install 
-RUN    && cd / \
+RUN cd / \
     && chmod 755 /entrypoint.sh \
     && rm -rf /usr/local/source \
     && chmod 755 /usr/local/sbin/recorder-health.sh \
