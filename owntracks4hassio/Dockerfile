@@ -1,6 +1,5 @@
 #ARG BUILD_FROM="alpine:latest"
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM alpine
 LABEL version="1.0" description="OwnTracks Recorder for Hass"
 LABEL authors="Zooil Yang <me@zooil.com>"
 MAINTAINER zooil <me@zooil.com>
