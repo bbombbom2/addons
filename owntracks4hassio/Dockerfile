@@ -16,7 +16,7 @@ COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
 
-yum install -y gcc-c++
+RUN apk add gcc-c++
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev libconfig-dev make \
         gcc musl-dev mosquitto-dev wget \
