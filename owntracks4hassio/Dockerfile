@@ -10,14 +10,13 @@ ENV LANG C.UTF-8
 # build with `docker build --build-arg recorder_version=x.y.z '
 ARG recorder_version=0.8.3
 
-COPY makeconf.sh recorder.tar.gz /
-COPY entrypoint.sh /entrypoint.sh
-COPY config.mk /config.mk
+COPY makeconf.sh entrypoint.sh recorder.tar.gz config.mk /
 COPY recorder.conf /etc/default/recorder.conf
 COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
 
+yum install -y gcc-c++
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev libconfig-dev make \
         gcc musl-dev mosquitto-dev wget \
@@ -29,7 +28,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && tar xzf recorder.tar.gz \
     && cd recorder-$VERSION \
     && mv /config.mk ./ \
-    && ./config.mk \
     && make \
     && make install \
     && chmod 755 /entrypoint.sh \
