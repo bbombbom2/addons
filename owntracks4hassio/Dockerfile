@@ -22,15 +22,15 @@ curl-dev libconfig-dev make \
 gcc musl-dev mosquitto-dev wget \
 && apk add --no-cache \
 libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
-&& mkdir -p /usr/local/source \
-&& cd /usr/local/source \
-&& mv /recorder.tar.gz ./ \
-&& tar xzf recorder.tar.gz \
-&& cd recorder-$VERSION \
-&& mv /config.mk ./ \
-&& make \
-&& make install \
-&& cd / \
+RUN mkdir -p /usr/local/source \
+RUN cd /usr/local/source \
+RUN mv /recorder.tar.gz ./ \
+RUN tar xzf recorder.tar.gz \
+RUN cd recorder-$VERSION \
+RUN mv /config.mk ./ \
+RUN make \
+RUN make install \
+RUN cd / \
 RUN chmod 755 /entrypoint.sh \
 RUN rm -rf /usr/local/source \
 RUN chmod 755 /usr/local/sbin/recorder-health.sh \
