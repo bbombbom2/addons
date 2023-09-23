@@ -23,17 +23,17 @@ RUN apk add --no-cache --virtual .build-deps \
         libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
     && mkdir -p /usr/local/source \
     && cd /usr/local/source \
-    && mv /recorder.tar.gz ./ \
+#    && mv /recorder.tar.gz ./ \
 #    && tar xzf recorder.tar.gz \
 #    && cd recorder-$VERSION \
 #    && mv /config.mk ./ \
 #    && make \
 #    && make install \
 #    && cd / \
-#    && chmod 755 /entrypoint.sh \
-#    && rm -rf /usr/local/source \
-#    && chmod 755 /usr/local/sbin/recorder-health.sh \
-#    && apk del .build-deps
+    && chmod 755 /entrypoint.sh \
+    && rm -rf /usr/local/source \
+    && chmod 755 /usr/local/sbin/recorder-health.sh \
+    && apk del .build-deps
 RUN apk add --no-cache \
 	curl jq
 
