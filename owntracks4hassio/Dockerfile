@@ -16,7 +16,7 @@ COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
 
-RUN apt update && apt install -y make
+RUN apt sudo update && sudo apt install -y make
 
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev libconfig-dev make \
