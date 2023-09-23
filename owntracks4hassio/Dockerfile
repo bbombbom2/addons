@@ -20,8 +20,10 @@ ENV VERSION=$recorder_version
 RUN apk add --no-cache --virtual .build-deps \
 curl-dev libconfig-dev make \
 gcc musl-dev mosquitto-dev wget \
-&& apk add --no-cache \
+
+RUN apk add --no-cache \
 libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
+
 RUN mkdir -p /usr/local/source \
 RUN cd /usr/local/source \
 RUN mv /recorder.tar.gz ./ \
