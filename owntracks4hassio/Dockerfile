@@ -25,15 +25,15 @@ RUN apk add --no-cache --virtual .build-deps \
     && cd /usr/local/source \
 #    && mv /recorder.tar.gz ./ \
 #    && tar xzf recorder.tar.gz \
-#    && cd recorder-$VERSION \
-#    && mv /config.mk ./ \
-#    && make \
-#    && make install \
-#    && cd / \
-#    && chmod 755 /entrypoint.sh \
-#    && rm -rf /usr/local/source \
-#    && chmod 755 /usr/local/sbin/recorder-health.sh \
-#    && apk del .build-deps
+    && cd recorder-$VERSION \
+    && mv /config.mk ./ \
+    && make \
+    && make install \
+    && cd / \
+    && chmod 755 /entrypoint.sh \
+    && rm -rf /usr/local/source \
+    && chmod 755 /usr/local/sbin/recorder-health.sh \
+    && apk del .build-deps
 RUN apk add --no-cache \
 	curl jq
 
