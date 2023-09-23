@@ -28,7 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && cd recorder-$VERSION \
     && mv /config.mk ./
 #    && make \
- #   && make install \
+#    && make install \
     && cd / \
     && chmod 755 /entrypoint.sh \
     && rm -rf /usr/local/source \
