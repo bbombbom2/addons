@@ -21,12 +21,12 @@ RUN apk add --no-cache --virtual .build-deps \
 curl-dev libconfig-dev make \
 gcc musl-dev mosquitto-dev wget \
 
-#RUN apk add --no-cache \
-#libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
+RUN apk add --no-cache \
+libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
 
-#RUN mkdir -p /usr/local/source \
-#RUN cd /usr/local/source \
-#RUN mv /recorder.tar.gz ./ \
+RUN mkdir -p /usr/local/source \
+RUN cd /usr/local/source \
+RUN mv /recorder.tar.gz ./ \
 #RUN tar xzf recorder.tar.gz \
 #RUN cd recorder-$VERSION \
 #RUN mv /config.mk ./ \
@@ -40,12 +40,12 @@ gcc musl-dev mosquitto-dev wget \
 #RUN apk add --no-cache \
 #curl jq
 
-#VOLUME ["/store", "/config"]
+VOLUME ["/store", "/config"]
 
-#COPY recorder.conf /config/recorder.conf
+COPY recorder.conf /config/recorder.conf
 
-#HEALTHCHECK CMD /usr/local/sbin/recorder-health.sh
+HEALTHCHECK CMD /usr/local/sbin/recorder-health.sh
 
-#EXPOSE 8083
+EXPOSE 8083
 
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
