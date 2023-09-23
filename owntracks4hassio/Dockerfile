@@ -23,7 +23,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
     && mkdir -p /usr/local/source \
     && cd /usr/local/source \
-#    && mv /recorder.tar.gz ./ \
+    && mv /recorder.tar.gz ./ \
 #    && tar xzf recorder.tar.gz \
 #    && cd recorder-$VERSION \
 #    && mv /config.mk ./ \
