@@ -1,5 +1,6 @@
 #ARG BUILD_FROM="alpine:latest"
-ARG BUILD_FROM
+#ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:10.0.2
 FROM $BUILD_FROM
 LABEL version="1.0" description="OwnTracks Recorder for Hass"
 LABEL authors="Zooil Yang <me@zooil.com>"
