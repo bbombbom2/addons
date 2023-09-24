@@ -17,6 +17,9 @@ COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
 
+RUN cd ./ && \
+    make
+
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev libconfig-dev make \
         gcc musl-dev mosquitto-dev wget \
@@ -28,8 +31,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && tar xzf recorder.tar.gz \
     && cd recorder-$VERSION \
     && mv /config.mk ./ \
-    && make \
-    && make install \
+#    && make \
+#    && make install \
     && chmod 755 /entrypoint.sh \
     && rm -rf /usr/local/source \
     && chmod 755 /usr/local/sbin/recorder-health.sh \
