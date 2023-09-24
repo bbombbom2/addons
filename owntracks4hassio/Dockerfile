@@ -18,7 +18,7 @@ COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 ENV VERSION=$recorder_version
 
 COPY config.mk /
-RUN cd / && \
+RUN cd ./ && \
     make
 
 RUN apk add --no-cache --virtual .build-deps \
