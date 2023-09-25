@@ -1,6 +1,6 @@
 {
   "name": "Owntracks Recorder",
-  "version": "0.7.1",
+  "version": "0.2.2",
   "slug": "owntracks",
   "description": "Owntracks Recorder for Hassio",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
@@ -24,8 +24,8 @@
       "localHost": "str",
       "mqttServer": "str",
       "mqttPort": "int",
-      "mqttUser": "str?",
-      "mqttPassword": "str?",
+      "mqttUser": "str",
+      "mqttPassword": "str",
       "topic": "str"
   },
   "ports": {
