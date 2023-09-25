@@ -5,7 +5,7 @@
   "version": "0.2.2",
   "slug": "ot-recorder",
   "description": "Owntracks Recorder - connects to your mqtt broker and consumes owntracks locations",
-  "startup": "services",
+  "startup": "application",
   "boot": "auto",
   "ports": {
     "8083": 8083
@@ -16,8 +16,13 @@
       "armhf",
       "i386"
   ],
-  "webui": "http://[HOST]:[PORT:8083]/",
+  "webui": "http://[HOST]:[PORT:8083]",
   "map": ["share:rw"],
+  "ingress": true,
+  "ingress_entry": "/",
+  "ingress_port": 8083,
+  "panel_icon": "mdi:map-clock",
+  "panel_title": "OwntracksREC",
   "options": {
     "topics":	"owntracks/#",
     "host":	"IPADDRESS_OR_HOSTNAME",
