@@ -18,6 +18,8 @@ COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
 
+RUN wget -q https://github.com/owntracks/recorder/archive/0.8.7.tar.gz -O - | tar xvzC /tmp
+
 COPY config.mk /tmp/recorder-0.8.7/
 
 RUN cd /tmp/recorder-0.8.7/ && \
