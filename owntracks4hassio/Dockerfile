@@ -1,35 +1,44 @@
-# we use a different image for building
-# see https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.14.0#faccessat2
-
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:10.0.2
-FROM alpine:3.13 AS builder
-
-ENV LANG C.UTF-8
-
-RUN apk add --no-cache \
-    abuild linux-headers musl-dev mosquitto-dev \
-    lmdb-dev curl-dev libconfig-dev gcc make libsodium-dev && \
-    wget -q https://github.com/owntracks/recorder/archive/0.8.7.tar.gz -O - | tar xvzC /tmp
-
-COPY config.mk /tmp/recorder-0.8.7/
-
-RUN cd /tmp/recorder-0.8.7/ && \
-    make
-
+#ARG BUILD_FROM="alpine:latest"
+ARG BUILD_FROM
 FROM $BUILD_FROM
+LABEL version="1.0" description="OwnTracks Recorder for Hass"
+LABEL authors="Zooil Yang <me@zooil.com>"
+MAINTAINER zooil <me@zooil.com>
 
 ENV LANG C.UTF-8
 
-RUN apk -U --no-cache upgrade && \
-    apk --no-cache add jq && \
-    apk --no-cache add libcurl lmdb libconfig libsodium mosquitto-libs
+# build with `docker build --build-arg recorder_version=x.y.z '
+ARG recorder_version=0.8.3
 
-EXPOSE 8083
+COPY makeconf.sh entrypoint.sh recorder.tar.gz config.mk / 
+COPY recorder.conf /etc/default/recorder.conf
+COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
-COPY --from=builder /tmp/recorder-0.8.7/ocat /usr/sbin/
-COPY --from=builder /tmp/recorder-0.8.7/ot-recorder /usr/sbin/
-COPY --from=builder /tmp/recorder-0.8.7/docroot /var/spool/owntracks/recorder/htdocs
-COPY run.sh /
-RUN chmod a+x /run.sh
+ENV VERSION=$recorder_version
 
-CMD [ "/run.sh" ]
+RUN apk add --no-cache --virtual .build-deps \
+        curl-dev libconfig-dev make \
+        gcc musl-dev mosquitto-dev wget \
+    && apk add --no-cache \
+        libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
+    && mkdir -p /usr/local/source \
+    && cd /usr/local/source \
+    && mv /recorder.tar.gz ./ \
+    && tar xzf recorder.tar.gz \
+    && cd recorder-$VERSION \
+    && mv /config.mk ./ \
+    && make \
+    && make install \
+    && cd / \
+    && chmod 755 /entrypoint.sh \
+    && rm -rf /usr/local/source \
+    && chmod 755 /usr/local/sbin/recorder-health.sh \
+    && apk del .build-deps
+RUN apk add --no-cache \
+	curl jq
+
+VOLUME ["/store", "/config"]
+
+HEALTHCHECK CMD /usr/local/sbin/recorder-health.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
