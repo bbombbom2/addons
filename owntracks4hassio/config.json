@@ -24,8 +24,8 @@
       "localHost": "str",
       "mqttServer": "str",
       "mqttPort": "int",
-      "mqttUser": "str?",
-      "mqttPassword": "str?",
+      "mqttUser": "str",
+      "mqttPassword": "str",
       "topic": "str"
   },
   "ports": {
