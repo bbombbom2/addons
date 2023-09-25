@@ -1,12 +1,15 @@
 {
   "name": "Owntracks Recorder",
-  "url": "https://git.asperti.com/paspo/hassio-addons",
+  "url": "https://github.com/HAKorea/addons",
   "image": "docker.asperti.com/paspo/hassio-ot-recorder",
-  "version": "0.2.2",
-  "slug": "ot-recorder",
-  "description": "Owntracks Recorder - connects to your mqtt broker and consumes owntracks locations",
-  "startup": "services",
+  "version": "0.7.1",
+  "slug": "owntracks",
+  "description": "Owntracks Recorder for Hassio",
+  "startup": "application",
   "boot": "auto",
+  "ingress": true,
+  "ingress_entry": "/",
+  "ingress_port": 8083,
   "ports": {
     "8083": 8083
   },
