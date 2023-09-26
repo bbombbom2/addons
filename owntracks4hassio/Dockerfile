@@ -15,25 +15,25 @@ COPY recorder.conf /etc/default/recorder.conf
 COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
-RUN apk add g++ && apk add make
-RUN apk add --no-cache --virtual .build-deps \
-        curl-dev libconfig-dev make \
-        gcc musl-dev mosquitto-dev wget \
-    && apk add --no-cache \
-        libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev \
-    && mkdir -p /usr/local/source \
-    && cd /usr/local/source \
-    && mv /recorder.tar.gz ./ \
-    && tar xzf recorder.tar.gz \
-    && cd recorder-$VERSION \
-    && mv /config.mk ./ \
-    && make \
-    && make install \
-    && cd / \
-    && chmod 755 /entrypoint.sh \
-    && rm -rf /usr/local/source \
-    && chmod 755 /usr/local/sbin/recorder-health.sh \
-    && apk del .build-deps
+RUN apk add g++ && apk add make build-essential
+RUN apk add --no-cache --virtual .build-deps
+RUN apk add curl-dev libconfig-dev make
+RUN apk add gcc musl-dev mosquitto-dev wget
+RUN apk add apk add --no-cache
+RUN apk add libcurl libconfig-dev mosquitto-dev lmdb-dev libsodium-dev lua5.2-dev
+RUN mkdir -p /usr/local/source
+RUN cd /usr/local/source
+RUN mv /recorder.tar.gz ./
+RUN tar xzf recorder.tar.gz
+RUN cd recorder-$VERSION
+RUN mv /config.mk ./
+RUN make
+RUN make install
+RUN cd /
+RUN chmod 755 /entrypoint.sh
+RUN rm -rf /usr/local/source
+RUN chmod 755 /usr/local/sbin/recorder-health.sh
+RUN apk del .build-deps
 RUN apk add --no-cache \
 	curl jq
 
