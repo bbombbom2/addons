@@ -1,9 +1,9 @@
 {
   "name": "Owntracks Recorder",
-  "version": "latest",
+  "version": "0.7.1",
   "slug": "owntracks",
   "description": "Owntracks Recorder for Hassio",
-  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386", "arm64"],
   "url": "https://github.com/HAKorea/addons",
   "image": "docker.asperti.com/paspo/hassio-ot-recorder",
   "startup": "application",
