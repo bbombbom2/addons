@@ -15,6 +15,7 @@ COPY recorder.conf /etc/default/recorder.conf
 COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 
 ENV VERSION=$recorder_version
+
 RUN apk add g++ && apk add make build-essential
 RUN apk add --no-cache --virtual .build-deps
 RUN apk add curl-dev libconfig-dev make
