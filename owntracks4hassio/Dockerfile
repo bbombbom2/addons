@@ -26,7 +26,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && mv /recorder.tar.gz ./ \
     && tar xzf recorder.tar.gz \
     && cd recorder-$VERSION \
-    && mv /config.mk ./ \
+#    && mv /config.mk ./ \
+    && cd / \
     && make \
     && make install \
     && cd / \
